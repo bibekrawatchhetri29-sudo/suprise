@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Entry Page</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Entry screen */
+    #entryScreen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background: #222;
+      color: white;
+      flex-direction: column;
+    }
+
+    #entryScreen button {
+      padding: 15px 30px;
+      font-size: 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #28a745;
+      color: white;
+    }
+
+    #entryScreen button:hover {
+      background: #218838;
+    }
+
+    /* Main content with background */
+    #mainContent {
+      display: none;
+      height: 100%;
+      width: 100%;
+      background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Typing text */
+    #animatedText {
+      color: white;
+      font-size: 60px;
+      font-weight: bold;
+      text-shadow: 2px 2px 10px black;
+      border-right: 4px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 3s steps(20, end) forwards, blink 0.7s infinite step-end;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 22ch; } /* adjust according to text length */
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: white; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="entryScreen">
+    <h1>Welcome!</h1>
+    <button onclick="enterSite()">Click to Enter</button>
+  </div>
+
+  <div id="mainContent">
+    <div id="animatedText">ARCHIT SEXYY!! </div>
+  </div>
+
+  <script>
+    function enterSite() {
+      document.getElementById('entryScreen').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'flex';
+    }
+  </script>
+
+</body>
+</html>
