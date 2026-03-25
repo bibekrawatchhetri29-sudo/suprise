@@ -1,96 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animated Entry Page</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arrow Animation Entry</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
 
-    /* Entry screen */
-    #entryScreen {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      background: #222;
-      color: white;
-      flex-direction: column;
-    }
+  /* Entry Screen */
+  #entryScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: #222;
+    color: white;
+    flex-direction: column;
+  }
 
-    #entryScreen button {
-      padding: 15px 30px;
-      font-size: 24px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      background: #28a745;
-      color: white;
-    }
+  #entryScreen button {
+    padding: 15px 30px;
+    font-size: 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #28a745;
+    color: white;
+  }
 
-    #entryScreen button:hover {
-      background: #218838;
-    }
+  #entryScreen button:hover {
+    background: #218838;
+  }
 
-    /* Main content with background */
-    #mainContent {
-      display: none;
-      height: 100%;
-      width: 100%;
-      background: url('https://github.com/bibekrawatchhetri29-sudo/suprise/blob/main/arc.jpg?raw=true') no-repeat center center/cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  /* Main Content */
+  #mainContent {
+    display: none;
+    height: 100%;
+    width: 100%;
+    background: url('https://github.com/bibekrawatchhetri29-sudo/suprise/blob/main/arc.jpg?raw=true') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
 
-    /* Typing text */
-    #animatedText {
-      color: white;
-      font-size: 60px;
-      font-weight: bold;
-      text-shadow: 2px 2px 10px black;
-      border-right: 4px solid white;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 3s steps(20, end) forwards, blink 0.7s infinite step-end;
-    }
+  /* Arrow */
+  #arrow {
+    width: 60px;
+    height: 10px;
+    background: red;
+    position: absolute;
+    left: -80px;
+    top: 50%;
+    transform: rotate(10deg);
+    display: none;
+  }
 
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 22ch; } /* adjust according to text length */
-    }
+  /* Typing text */
+  #animatedText {
+    color: white;
+    font-size: 60px;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px black;
+    border-right: 4px solid white;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    opacity: 0;
+  }
 
-    @keyframes blink {
-      from, to { border-color: transparent; }
-      50% { border-color: white; }
-    }
-  </style>
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 22ch; } /* adjust according to text length */
+  }
+
+  @keyframes blink {
+    from, to { border-color: transparent; }
+    50% { border-color: white; }
+  }
+
+</style>
 </head>
 <body>
 
+  <!-- Entry screen -->
   <div id="entryScreen">
     <h1>Welcome!</h1>
     <button onclick="enterSite()">Click to Enter</button>
   </div>
 
+  <!-- Main content -->
   <div id="mainContent">
-    <div id="animatedText"> WHAT'S UP ARCHIT SEXYY!! </div>
+    <div id="arrow"></div>
+    <div id="animatedText">ARCHIT HOTTIE !!</div>
   </div>
 
-  <script>
-    function enterSite() {
-      document.getElementById('entryScreen').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'flex';
+<script>
+function enterSite() {
+  // Hide entry screen
+  document.getElementById('entryScreen').style.display = 'none';
+  // Show main content
+  const main = document.getElementById('mainContent');
+  main.style.display = 'flex';
+
+  // Show arrow
+  const arrow = document.getElementById('arrow');
+  arrow.style.display = 'block';
+
+  // Animate arrow across screen
+  let pos = -80;
+  const interval = setInterval(() => {
+    if (pos > window.innerWidth) {
+      clearInterval(interval);
+      arrow.style.display = 'none';
+      showText();
+    } else {
+      pos += 20; // speed of arrow
+      arrow.style.left = pos + 'px';
     }
-  </script>
+  }, 20);
+}
+
+// Show animated text with typing effect
+function showText() {
+  const text = document.getElementById('animatedText');
+  text.style.opacity = 1;
+  text.style.animation = 'typing 3s steps(22, end) forwards, blink 0.7s infinite step-end';
+}
+</script>
 
 </body>
 </html>
+
